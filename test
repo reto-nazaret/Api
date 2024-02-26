@@ -1,0 +1,40 @@
+project_name/
+│
+├── config/
+│   └── database.php         
+│
+├── controllers/
+│   └── AlumnoController.php   
+│   └── ...                  
+│
+├── services/
+│   └── AlumnoService.php      
+│   └── ...                  
+│
+├── entities/
+│   └── Alumno.php             
+│   └── ...                  
+│
+├── dtos/
+│   └── AlumnoDTO.php          
+│   └── ...                  
+│
+├── middleware/
+│   └── JWTMiddleware.php    
+│
+├── requests/
+│   └── AlumnoCreateRequest.php
+│   └── AlumnoUpdateRequest.php
+│   └── ...                  
+│
+├── utils/
+│   └── JWTUtils.php         
+│   └── ...                  
+│
+├── vendor/                  
+│
+├── .env                     
+├── composer.json            
+├── index.php                
+├── .htaccess                
+└── README.md                
