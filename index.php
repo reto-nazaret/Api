@@ -1,5 +1,22 @@
 <?php
 
+// Function to create and return API response
+function createApiResponse($statusCode, $data, $exceptionMessage = null) {
+    http_response_code($statusCode);
+    header('Content-Type: application/json');
+
+    $response = array(
+        "data" => $data
+    );
+
+    if ($exceptionMessage !== null) {
+        $response['error'] = $exceptionMessage;
+    }
+
+    echo json_encode($response);
+    die(); // Terminate script execution
+}
+
 // Get the controller name from the request
 $controllerName = ucfirst($_GET['controller']) . 'Controller';
 
