@@ -1,17 +1,17 @@
 <?php
 
-require_once './../services/AlumnosService.php';
+require_once  'services\alumnosService.php';
 
 class AlumnosController
 {
     private $alumnosService;
- 
+
     public function __construct()
     {
         $this->alumnosService = new AlumnosService();
     }
 
-    public function handleRequest()
+    public function init()
     {
         $method = $_SERVER['REQUEST_METHOD'];
 
@@ -33,18 +33,18 @@ class AlumnosController
                 }
                 break;
             case 'POST':
-                require_once '../requests/AlumnoCreateRequest.php';
+                require_once 'requests\alumnoVerifyCreateRequest.php';
                 $requestData = json_decode(file_get_contents('php://input'), true);
-                $request = new AlumnoCreateRequest($requestData);
-
-                $data = $this->alumnosService->create($request);
-
+                $verifRequest = new AlumnoVerifyCreateRequest($requestData);
+// verif request si no esta  bien -> error
+                $data = $this->alumnosService->create($requestData);
+                echo json_encode($data);
                 // verificar si el $data esta bien, para crear el response
                 break;
             case 'PUT':
-                require_once '../requests/AlumnoUpdateRequest.php';
+                require_once 'requests\alumnoVerifyUpdateRequest.php';
                 $requestData = json_decode(file_get_contents('php://input'), true);
-                $request = new AlumnoUpdateRequest($requestData);
+                $request = new AlumnoVerifyUpdateRequest($requestData);
 
                 $data = $this->alumnosService->update($request);
                 // verificar si el $data esta bien, para crear el response
@@ -55,7 +55,7 @@ class AlumnosController
                 if (isset($_GET['id']) && (filter_var($_GET['id'], FILTER_VALIDATE_INT) === false || $_GET['id'] <= 0)) {
                     $id = $_GET['id'];
                     $data = $this->alumnosService->delete($id);
-                    
+
                     // create the response
                 }
 

@@ -33,19 +33,17 @@ if (!file_exists($controllerFilePath)) {
 require_once $controllerFilePath;
 
 // Check if the request method is supported by the controller
-$validMethods = get_class_methods($controllerName);
-$method = $_SERVER['REQUEST_METHOD'];
+// $validMethods = get_class_methods($controllerName);
 
-if (!in_array($method, $validMethods)) {
-    http_response_code(405);
-    echo json_encode(array("message" => "Method not allowed."));
-    exit();
-}
+
+// if (!in_array($method, $validMethods)) {
+//     http_response_code(405);
+//     echo json_encode(array("message" => "Method not allowed."));
+//     exit();
+// }
 
 // Instantiate the controller
 $controller = new $controllerName();
-
-// Execute the controller method
-$controller->$method();
+$controller->init();
 
 ?>
